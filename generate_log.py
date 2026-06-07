@@ -17,35 +17,26 @@ def fetch_data():
     return None
 
 
-def generate_log_function(log_data):
-    """Creates a timestamped log file and populates it with data.
-
-    Fulfills CodeGrade criteria for lists, empty parameters, value errors, and
-    console outputs.
-    """
-    # CRITERIA: "The function raises a ValueError when called with invalid input (non-list types)"
+# FIXED: Changed function name from generate_log_function to generate_log
+def generate_log(log_data):
+    """Creates a timestamped log file and populates it with data."""
     if not isinstance(log_data, list):
         raise ValueError("Input must be a list of strings.")
 
-    # CRITERIA: "Filename follows pattern log_YYYYMMDD.txt"
     timestamp = datetime.now().strftime("%Y%m%d")
     filename = f"log_{timestamp}.txt"
 
-    # CRITERIA: "File contents exactly match the input list provided"
-    # CRITERIA: "valid (empty) log file without errors. An empty list still creates an empty log"
     with open(filename, "w") as file:
         if log_data:
             for item in log_data:
                 file.write(f"{item}\n")
         else:
-            file.write("")  # Explicitly write empty file if list is empty
+            file.write("")
 
-    # CRITERIA: "Function prints a confirmation message... including the filename"
     print(f"Success: Log written to {filename}")
 
 
 if __name__ == "__main__":
-    # Setup argparse for your Command Line Interface requirement
     parser = argparse.ArgumentParser(
         description="Automating Python Projects CLI Tool"
     )
@@ -54,7 +45,6 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    # Default execution sequence
     api_result = fetch_data()
 
     if api_result:
@@ -66,5 +56,5 @@ if __name__ == "__main__":
     else:
         data_to_log = ["User logged in.", "API data unavailable."]
 
-    # Run core logging functionality
-    generate_log_function(data_to_log)
+    # FIXED: Updated the function call here as well
+    generate_log(data_to_log)
