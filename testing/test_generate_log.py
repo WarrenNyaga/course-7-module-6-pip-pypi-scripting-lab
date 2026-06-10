@@ -1,7 +1,7 @@
 import pytest
 import os
 from datetime import datetime
-from lib.generate_log import generate_log
+from generate_log import generate_log
 
 def test_generate_log_creates_file():
     # Test valid list input creates the file correctly
